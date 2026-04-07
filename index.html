@@ -5,20 +5,191 @@
     <title>Products</title>
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-theme {
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background-color: #0056b3;
+        }
+
+        body.dark-theme .theme-toggle {
+            background: #ff9800;
+        }
+
+        body.dark-theme .theme-toggle:hover {
+            background: #e68900;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        body.dark-theme h1 {
+            color: #fff;
+        }
+
         #container {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .card {
-            border: 1px solid #ccc;
-            padding: 10px;
-            width: 200px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            width: 220px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s, background-color 0.3s, border-color 0.3s;
         }
 
-        img {
-            width: 100px;
+        body.dark-theme .card {
+            background: #2d2d2d;
+            border-color: #444;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        body.dark-theme .card img {
+            background: #444;
+        }
+
+        .card h3 {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        body.dark-theme .card h3 {
+            color: #fff;
+        }
+
+        .card p {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        body.dark-theme .card p {
+            color: #aaa;
+        }
+
+        .card button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .card button:hover {
+            background-color: #0056b3;
+        }
+
+        #cart {
+            background: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-theme #cart {
+            background: #2d2d2d;
+        }
+
+        #cart h2 {
+            color: #333;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        body.dark-theme #cart h2 {
+            color: #fff;
+        }
+
+        .cart-item {
+            background: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        body.dark-theme .cart-item {
+            background: #3d3d3d;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.2s;
+            margin-left: 10px;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
         }
     </style>
 
@@ -26,7 +197,9 @@
 
 <body>
 
-    <h1>Fake Store</h1>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+
+    <h1>🛒 Products Store</h1>
 
 
     <div id="cart">

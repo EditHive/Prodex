@@ -1,9 +1,16 @@
+function toggleTheme() {
+    document.body.classList.toggle('dark-theme')
+    const toggle = document.querySelector('.theme-toggle')
+    if (document.body.classList.contains('dark-theme')) {
+        toggle.textContent = '☀️ Light Mode'
+    } else {
+        toggle.textContent = '🌙 Dark Mode'
+    }
+}
+
 let con = document.getElementById('container')
 let cart = document.getElementById('cart')
 let cartItems = []
-
-console.log('Container:', con)
-console.log('Cart:', cart)
 
 fetch('https://dummyjson.com/products')
     .then(response => {
@@ -16,7 +23,7 @@ fetch('https://dummyjson.com/products')
 
             let card = document.createElement('div')
             const img = document.createElement('img')
-            img.src = res.image
+            img.src = res.thumbnail || res.image
             img.alt = res.title
             const title = document.createElement('h3')
             title.textContent = res.title
@@ -45,10 +52,12 @@ fetch('https://dummyjson.com/products')
 
 let srijal = (res) => {
     const cartitem = document.createElement('div')
+    cartitem.classList.add('cart-item')
     const title = document.createElement('p')
     title.innerText = res.title
     const delbtn = document.createElement('button')
     delbtn.innerText = "delete"
+    delbtn.classList.add('delete-btn')
 
     cartitem.appendChild(title)
     cartitem.appendChild(delbtn)
