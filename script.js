@@ -51,19 +51,38 @@ fetch('https://dummyjson.com/products')
     })
 
 let srijal = (res) => {
+    const emptyMsg = document.getElementById('cart-empty')
+    if (emptyMsg) emptyMsg.style.display = 'none'
+
     const cartitem = document.createElement('div')
     cartitem.classList.add('cart-item')
+
+    const info = document.createElement('div')
+    info.classList.add('cart-item-info')
+
     const title = document.createElement('p')
     title.innerText = res.title
+
+    const price = document.createElement('span')
+    price.classList.add('item-price')
+    price.innerText = '$ ' + res.price
+
+    info.appendChild(title)
+    info.appendChild(price)
+
     const delbtn = document.createElement('button')
-    delbtn.innerText = "delete"
+    delbtn.innerText = "Remove"
     delbtn.classList.add('delete-btn')
 
-    cartitem.appendChild(title)
+    cartitem.appendChild(info)
     cartitem.appendChild(delbtn)
     cart.appendChild(cartitem)
 
     delbtn.addEventListener('click', () => {
         cartitem.remove()
+        const remaining = cart.querySelectorAll('.cart-item')
+        if (remaining.length === 0 && emptyMsg) {
+            emptyMsg.style.display = 'block'
+        }
     })
 }
